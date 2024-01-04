@@ -1,8 +1,12 @@
 /*
 
+************************************************************
+
 A simple PS/2 keyboard interface for FPGA written in Verilog
 
-Copyright (c) 2024 by Robin Jacobs
+           Copyright (c) 2024 by Robin Jacobs
+			  
+************************************************************
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,8 +53,8 @@ module ps2_keyboard (
         else                                        // Timeout counter is zero
             bitsCount <= 0;                         // Reset bits counter
 
-        if (previousClock != kbd_clk) begin			// Filter instability on the clock line, the clock should remain the same at least SAMPLE_DELAY cycles
-				bitDone <= 1'b0;                    // It will be a new bit so it is not "done"
+        if (previousClock != kbd_clk) begin			 // Filter instability on the clock line, the clock should remain the same at least SAMPLE_DELAY cycles
+				bitDone <= 1'b0;                        // It will be a new bit so it is not "done"
             debounceCnt <= SAMPLE_DELAY;            // Wait SAMPLE_DELAY cycles before sampling
             previousClock <= kbd_clk;               // Store clock edge to detect changes
         end else if (debounceCnt != 0) begin        // Debounce counter is not zero, wait more
