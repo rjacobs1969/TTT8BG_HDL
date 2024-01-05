@@ -4,8 +4,8 @@
 
 A simple PS/2 keyboard interface for FPGA written in Verilog
 
-           Copyright (c) 2024 by Robin Jacobs
-			  
+           Copyright (c) 2024 by Robin Jacobs (elholandes44@gmail.com)
+
 ************************************************************
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,24 +32,24 @@ module ps2_keyboard (
     input wire clk32,                               // System clock 32Mhz, not critical but TIMOUT_VALUE and SAMPLE_DELAY must be adjusted for other frequencies
     input wire kbd_clk,                             // Keyboard clock line
     input wire kbd_dat,                             // Keyboard data line
-    output reg	interrupt,                          // Interrupt signal
+    output reg	interrupt,                           // Interrupt signal
     output reg [7:0] scanCode                       // 8 bit scancode
 );
-    localparam TIMEOUT_VALUE = 3200;                // 100 uS at 32 Mhz
-    localparam SAMPLE_DELAY = 10;                   // 10 cycles at 32 Mhz
+    localparam TIMEOUT_VALUE = 15'd3200;            // 100 uS at 32 Mhz
+    localparam SAMPLE_DELAY = 5'd10;                // 10 cycles at 32 Mhz
 
     reg previousClock;                              // Previous clock value to detect clock edges
     reg bitDone;                                    // Flag to indicate that a bit has already been processed
-    reg [14:0] debounceCnt;                         // Clock debounce filter counter
     reg [10:0] shiftRegister = 11'b0;               // Shift register for received data
-    integer bitsCount = 0;                          // Number of bits received
-    integer timeout = 0;                            // Bus timeout counter
-
+    reg [4:0] debounceCnt = 5'b0;						 // Clock debounce filter counter
+	 reg [14:0] timeout = 15'b0;							 // Bus timeout counter
+	 reg [3:0] bitsCount = 4'b0;                           // Number of bits received
+    
     always @(posedge clk32) begin
         interrupt <= 1'b0;                          // Clear interrupt signal by default
                                                     // Timeout check to check if bus does not send any data for more than 100 uS
         if (timeout != 0)                           // Timeout counter is not zero
-            timeout <= timeout - 1;                 // Decrement timeout counter
+            timeout <= timeout - 1'b1;                 // Decrement timeout counter
         else                                        // Timeout counter is zero
             bitsCount <= 0;                         // Reset bits counter
 
@@ -58,12 +58,12 @@ module ps2_keyboard (
             debounceCnt <= SAMPLE_DELAY;            // Wait SAMPLE_DELAY cycles before sampling
             previousClock <= kbd_clk;               // Store clock edge to detect changes
         end else if (debounceCnt != 0) begin        // Debounce counter is not zero, wait more
-            debounceCnt <= debounceCnt - 1;         // Decrement debounce counter
+            debounceCnt <= debounceCnt - 5'b00001;  // Decrement debounce counter
         end else if (previousClock == 1'b1 && bitDone == 1'b0) begin
             shiftRegister <= {kbd_dat, shiftRegister[10:1]};// Move data into shift register
             timeout <= TIMEOUT_VALUE;               // Reset timeout
             if (bitsCount < 10) begin
-                bitsCount <= bitsCount + 1;
+                bitsCount <= bitsCount + 4'b0001;
             end else begin                          // All 10 bits received
 					 interrupt <= 1'b1;                  // Set interrupt signal
                 bitsCount <= 0;                     // Reset bits counter
