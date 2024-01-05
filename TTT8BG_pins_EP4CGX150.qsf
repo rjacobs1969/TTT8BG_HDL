@@ -1,0 +1,193 @@
+# DEFAULTS FOR TTT8BG WITH QMTECH_EP4CGX150 CORE BOARD WITH FPGA FACING DOWN
+
+# CLOCK
+set_location_assignment PIN_B14 -to CLOCK_50
+
+# LEDS  on core board
+set_location_assignment PIN_AD24 -to KEY1
+set_location_assignment PIN_AD23 -to KEY0
+
+# KEYS  on core board
+set_location_assignment PIN_A24 -to LED0
+set_location_assignment PIN_A25 -to LED1
+
+# I2C
+set_location_assignment PIN_B9  -to I2C_SDA
+set_location_assignment PIN_C10  -to I2C_SCL
+
+# SERIAL
+set_location_assignment PIN_E1  -to SER_RX
+set_location_assignment PIN_E2  -to SER_TX
+
+# COMPOSITE_VIDEO
+set_location_assignment PIN_B19  -to CSYNC
+set_location_assignment PIN_C19  -to CHROMA0
+set_location_assignment PIN_A21  -to CHROMA1
+set_location_assignment PIN_C21  -to LUMA0
+set_location_assignment PIN_B23  -to LUMA1
+set_location_assignment PIN_B21  -to LUMA2
+
+# VGA
+set_location_assignment PIN_A8  -to VGA_HS
+set_location_assignment PIN_A6  -to VGA_B0
+set_location_assignment PIN_B6  -to VGA_R1
+set_location_assignment PIN_A5  -to VGA_G1
+set_location_assignment PIN_A4  -to VGA_B2
+set_location_assignment PIN_C4  -to VGA_R3
+set_location_assignment PIN_A2  -to VGA_G3
+set_location_assignment PIN_B1  -to VGA_B4
+set_location_assignment PIN_C1  -to VGA_G5
+set_location_assignment PIN_A9  -to VGA_VS
+set_location_assignment PIN_A7  -to VGA_G0
+set_location_assignment PIN_B7  -to VGA_R0
+set_location_assignment PIN_B5  -to VGA_B1
+set_location_assignment PIN_B4  -to VGA_G2
+set_location_assignment PIN_C5  -to VGA_R2
+set_location_assignment PIN_A3  -to VGA_B3
+set_location_assignment PIN_B2  -to VGA_G4
+set_location_assignment PIN_D1  -to VGA_R4
+
+# PS2 PORT
+set_location_assignment PIN_A16 -to PS2_CLK_I
+set_location_assignment PIN_A11 -to PS2_CLK_O
+set_location_assignment PIN_A15 -to PS2_DAT_I
+set_location_assignment PIN_A10 -to PS2_DAT_O
+
+# IEC
+set_location_assignment PIN_A18 -to IEC_DATA_I
+set_location_assignment PIN_B18 -to IEC_CLK_I
+set_location_assignment PIN_B17 -to IEC_SRQ_I
+set_location_assignment PIN_C14 -to IEC_ATN_O
+set_location_assignment PIN_B13 -to IEC_DATA_O
+set_location_assignment PIN_C11 -to IEC_CLK_O
+set_location_assignment PIN_A12 -to IEC_SRQ_O
+
+# AVR
+set_location_assignment PIN_AC17  -to AVR_CLK
+
+# SPI
+set_location_assignment PIN_A19  -to SPI_CS_ROM
+set_location_assignment PIN_C17  -to SPI_MOSI
+set_location_assignment PIN_C16  -to SPI_SCK
+set_location_assignment PIN_A17  -to SPI_MISO
+set_location_assignment PIN_B15  -to SPI_CS_EXT0
+set_location_assignment PIN_C15  -to SPI_CS_EXT1
+set_location_assignment PIN_C13  -to SPI_CS_EXT2
+
+# AUDIO
+set_location_assignment PIN_B22  -to I2S_LRCK
+set_location_assignment PIN_A23  -to I2S_DIN
+set_location_assignment PIN_A22  -to I2S_BCK
+set_location_assignment PIN_A20  -to SPDIF
+
+# SNES CONTROLER INTERFACE
+set_location_assignment PIN_C12  -to SNES_CLOCK
+set_location_assignment PIN_A13  -to SNES_LATCH
+set_location_assignment PIN_B11  -to SNES_DATA1
+set_location_assignment PIN_B10  -to SNES_DATA2
+
+# USB_KEYBOARD_SPI
+set_location_assignment PIN_AF25  -to BK_CS
+set_location_assignment PIN_AD21  -to BK_MOSI
+set_location_assignment PIN_AF23  -to BK_MISO
+set_location_assignment PIN_AF22  -to BK_CLK
+
+# CPU INTERFACE
+set_location_assignment PIN_AE21  -to CPU_NMI_
+set_location_assignment PIN_AF21  -to CPU_ABORT_
+set_location_assignment PIN_AF19  -to CPU_IRQ_
+set_location_assignment PIN_AD19  -to CPU_RESET_
+set_location_assignment PIN_AF18  -to CPU_RDY
+set_location_assignment PIN_AD18  -to CPU_VPB
+set_location_assignment PIN_AF17  -to CPU_PHI2
+set_location_assignment PIN_AD17  -to CPU_BE
+set_location_assignment PIN_AF16  -to CPU_E
+set_location_assignment PIN_AD16  -to CPU_RW_
+set_location_assignment PIN_AF15  -to CPU_VDA
+set_location_assignment PIN_AC16  -to CPU_VPA
+
+set_location_assignment PIN_AE15  -to CPU_D0
+set_location_assignment PIN_AD15  -to CPU_D1
+set_location_assignment PIN_AD15  -to CPU_D2
+set_location_assignment PIN_AF12  -to CPU_D3
+set_location_assignment PIN_AD10  -to CPU_D4
+set_location_assignment PIN_AF9  -to CPU_D5
+set_location_assignment PIN_AF8  -to CPU_D6
+set_location_assignment PIN_AF6  -to CPU_D7
+
+set_location_assignment PIN_AE14  -to CPU_A0
+set_location_assignment PIN_AC15  -to CPU_A1
+set_location_assignment PIN_AC14  -to CPU_A2
+set_location_assignment PIN_AF11  -to CPU_A3
+set_location_assignment PIN_AC10  -to CPU_A4
+set_location_assignment PIN_AE9  -to CPU_A5
+set_location_assignment PIN_AF7  -to CPU_A6
+set_location_assignment PIN_AE7  -to CPU_A7
+set_location_assignment PIN_AE5  -to CPU_A8
+set_location_assignment PIN_AD5  -to CPU_A9
+set_location_assignment PIN_AF4  -to CPU_A10
+set_location_assignment PIN_AD3  -to CPU_A11
+set_location_assignment PIN_AE3  -to CPU_A12
+set_location_assignment PIN_AF6  -to CPU_A13
+set_location_assignment PIN_AD6  -to CPU_A14
+set_location_assignment PIN_AE6  -to CPU_A15
+set_location_assignment PIN_AE17  -to CPU_A16
+set_location_assignment PIN_AC18  -to CPU_A17
+set_location_assignment PIN_AE18  -to CPU_A18
+set_location_assignment PIN_AC19  -to CPU_A19
+set_location_assignment PIN_AE19  -to CPU_A20
+
+# USB
+set_location_assignment PIN_AF24  -to USB_INT_
+set_location_assignment PIN_AC21  -to USB_CS_
+
+# CIA
+set_location_assignment PIN_AD4  -to CIA_PHI22
+set_location_assignment PIN_AC4  -to CIA_CS22_
+
+# SRAM
+set_location_assignment PIN_AD20  -to RAM0_CS_
+set_location_assignment PIN_AF20  -to RAM1_CS_
+set_location_assignment PIN_AE23  -to WE_
+set_location_assignment PIN_AE22  -to RE_
+
+# SDRAM
+set_location_assignment PIN_G25 -to DRAM_WE_N
+set_location_assignment PIN_H24 -to DRAM_UDQM
+set_location_assignment PIN_H25 -to DRAM_RAS_N
+set_location_assignment PIN_F26 -to DRAM_LDQM
+set_location_assignment PIN_B25 -to DRAM_DQ[0]
+set_location_assignment PIN_B26 -to DRAM_DQ[1]
+set_location_assignment PIN_C25 -to DRAM_DQ[2]
+set_location_assignment PIN_C26 -to DRAM_DQ[3]
+set_location_assignment PIN_D25 -to DRAM_DQ[4]
+set_location_assignment PIN_D26 -to DRAM_DQ[5]
+set_location_assignment PIN_E25 -to DRAM_DQ[6]
+set_location_assignment PIN_E26 -to DRAM_DQ[7]
+set_location_assignment PIN_H23 -to DRAM_DQ[8]
+set_location_assignment PIN_G24 -to DRAM_DQ[9]
+set_location_assignment PIN_G22 -to DRAM_DQ[10]
+set_location_assignment PIN_F24 -to DRAM_DQ[11]
+set_location_assignment PIN_F23 -to DRAM_DQ[12]
+set_location_assignment PIN_E24 -to DRAM_DQ[13]
+set_location_assignment PIN_D24 -to DRAM_DQ[14]
+set_location_assignment PIN_C24 -to DRAM_DQ[15]
+set_location_assignment PIN_H26 -to DRAM_CS_N
+set_location_assignment PIN_E22 -to DRAM_CLK
+set_location_assignment PIN_K24 -to DRAM_CKE
+set_location_assignment PIN_G26 -to DRAM_CAS_N
+set_location_assignment PIN_J25 -to DRAM_BA[0]
+set_location_assignment PIN_J26 -to DRAM_BA[1]
+set_location_assignment PIN_L25 -to DRAM_ADDR[0]
+set_location_assignment PIN_L26 -to DRAM_ADDR[1]
+set_location_assignment PIN_M25 -to DRAM_ADDR[2]
+set_location_assignment PIN_M26 -to DRAM_ADDR[3]
+set_location_assignment PIN_N22 -to DRAM_ADDR[4]
+set_location_assignment PIN_N23 -to DRAM_ADDR[5]
+set_location_assignment PIN_N24 -to DRAM_ADDR[6]
+set_location_assignment PIN_M22 -to DRAM_ADDR[7]
+set_location_assignment PIN_M24 -to DRAM_ADDR[8]
+set_location_assignment PIN_L23 -to DRAM_ADDR[9]
+set_location_assignment PIN_K26 -to DRAM_ADDR[10]
+set_location_assignment PIN_L24 -to DRAM_ADDR[11]
+set_location_assignment PIN_K23 -to DRAM_ADDR[12]
