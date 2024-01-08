@@ -4,12 +4,12 @@
 set_location_assignment PIN_B14 -to CLOCK_50
 
 # LEDS  on core board
-set_location_assignment PIN_AD24 -to KEY1
-set_location_assignment PIN_AD23 -to KEY0
+set_location_assignment PIN_AD24 -to KEY[1]
+set_location_assignment PIN_AD23 -to KEY[0]
 
 # KEYS  on core board
-set_location_assignment PIN_A24 -to LED0
-set_location_assignment PIN_A25 -to LED1
+set_location_assignment PIN_A24 -to LED[0]
+set_location_assignment PIN_A25 -to LED[1]
 
 # I2C
 set_location_assignment PIN_B9  -to I2C_SDA
@@ -21,31 +21,31 @@ set_location_assignment PIN_E2  -to SER_TX
 
 # COMPOSITE_VIDEO
 set_location_assignment PIN_B19  -to CSYNC
-set_location_assignment PIN_C19  -to CHROMA0
-set_location_assignment PIN_A21  -to CHROMA1
-set_location_assignment PIN_C21  -to LUMA0
-set_location_assignment PIN_B23  -to LUMA1
-set_location_assignment PIN_B21  -to LUMA2
+set_location_assignment PIN_C19  -to CHROMA[0]
+set_location_assignment PIN_A21  -to CHROMA[1]
+set_location_assignment PIN_C21  -to LUMA[0]
+set_location_assignment PIN_B23  -to LUMA[1]
+set_location_assignment PIN_B21  -to LUMA[2]
 
 # VGA
 set_location_assignment PIN_A8  -to VGA_HS
-set_location_assignment PIN_A6  -to VGA_B0
-set_location_assignment PIN_B6  -to VGA_R1
-set_location_assignment PIN_A5  -to VGA_G1
-set_location_assignment PIN_A4  -to VGA_B2
-set_location_assignment PIN_C4  -to VGA_R3
-set_location_assignment PIN_A2  -to VGA_G3
-set_location_assignment PIN_B1  -to VGA_B4
-set_location_assignment PIN_C1  -to VGA_G5
+set_location_assignment PIN_A6  -to VGA_B[0]
+set_location_assignment PIN_B6  -to VGA_R[1]
+set_location_assignment PIN_A5  -to VGA_G[1]
+set_location_assignment PIN_A4  -to VGA_B[2]
+set_location_assignment PIN_C4  -to VGA_R[3]
+set_location_assignment PIN_A2  -to VGA_G[3]
+set_location_assignment PIN_B1  -to VGA_B[4]
+set_location_assignment PIN_C1  -to VGA_G[5]
 set_location_assignment PIN_A9  -to VGA_VS
-set_location_assignment PIN_A7  -to VGA_G0
-set_location_assignment PIN_B7  -to VGA_R0
-set_location_assignment PIN_B5  -to VGA_B1
-set_location_assignment PIN_B4  -to VGA_G2
-set_location_assignment PIN_C5  -to VGA_R2
-set_location_assignment PIN_A3  -to VGA_B3
-set_location_assignment PIN_B2  -to VGA_G4
-set_location_assignment PIN_D1  -to VGA_R4
+set_location_assignment PIN_A7  -to VGA_G[0]
+set_location_assignment PIN_B7  -to VGA_R[0]
+set_location_assignment PIN_B5  -to VGA_B[1]
+set_location_assignment PIN_B4  -to VGA_G[2]
+set_location_assignment PIN_C5  -to VGA_R[2]
+set_location_assignment PIN_A3  -to VGA_B[3]
+set_location_assignment PIN_B2  -to VGA_G[4]
+set_location_assignment PIN_D1  -to VGA_R[4]
 
 # PS2 PORT
 set_location_assignment PIN_A16 -to PS2_CLK_I
@@ -70,9 +70,9 @@ set_location_assignment PIN_A19  -to SPI_CS_ROM
 set_location_assignment PIN_C17  -to SPI_MOSI
 set_location_assignment PIN_C16  -to SPI_SCK
 set_location_assignment PIN_A17  -to SPI_MISO
-set_location_assignment PIN_B15  -to SPI_CS_EXT0
-set_location_assignment PIN_C15  -to SPI_CS_EXT1
-set_location_assignment PIN_C13  -to SPI_CS_EXT2
+set_location_assignment PIN_B15  -to SPI_CS_EXT[0]
+set_location_assignment PIN_C15  -to SPI_CS_EXT[1]
+set_location_assignment PIN_C13  -to SPI_CS_EXT[2]
 
 # AUDIO
 set_location_assignment PIN_B22  -to I2S_LRCK
@@ -83,8 +83,8 @@ set_location_assignment PIN_A20  -to SPDIF
 # SNES CONTROLER INTERFACE
 set_location_assignment PIN_C12  -to SNES_CLOCK
 set_location_assignment PIN_A13  -to SNES_LATCH
-set_location_assignment PIN_B11  -to SNES_DATA1
-set_location_assignment PIN_B10  -to SNES_DATA2
+set_location_assignment PIN_B11  -to SNES_DATA[1]
+set_location_assignment PIN_B10  -to SNES_DATA[2]
 
 # USB_KEYBOARD_SPI
 set_location_assignment PIN_AF25  -to BK_CS
@@ -106,36 +106,36 @@ set_location_assignment PIN_AD16  -to CPU_RW_
 set_location_assignment PIN_AF15  -to CPU_VDA
 set_location_assignment PIN_AC16  -to CPU_VPA
 
-set_location_assignment PIN_AE15  -to CPU_D0
-set_location_assignment PIN_AD15  -to CPU_D1
-set_location_assignment PIN_AD15  -to CPU_D2
-set_location_assignment PIN_AF12  -to CPU_D3
-set_location_assignment PIN_AD10  -to CPU_D4
-set_location_assignment PIN_AF9  -to CPU_D5
-set_location_assignment PIN_AF8  -to CPU_D6
-set_location_assignment PIN_AF6  -to CPU_D7
+set_location_assignment PIN_AE15  -to CPU_D[0]
+set_location_assignment PIN_AD15  -to CPU_D[1]
+set_location_assignment PIN_AD14  -to CPU_D[2]
+set_location_assignment PIN_AF12  -to CPU_D[3]
+set_location_assignment PIN_AD10  -to CPU_D[4]
+set_location_assignment PIN_AF9  -to CPU_D[5]
+set_location_assignment PIN_AF8  -to CPU_D[6]
+set_location_assignment PIN_AF6  -to CPU_D[7]
 
-set_location_assignment PIN_AE14  -to CPU_A0
-set_location_assignment PIN_AC15  -to CPU_A1
-set_location_assignment PIN_AC14  -to CPU_A2
-set_location_assignment PIN_AF11  -to CPU_A3
-set_location_assignment PIN_AC10  -to CPU_A4
-set_location_assignment PIN_AE9  -to CPU_A5
-set_location_assignment PIN_AF7  -to CPU_A6
-set_location_assignment PIN_AE7  -to CPU_A7
-set_location_assignment PIN_AE5  -to CPU_A8
-set_location_assignment PIN_AD5  -to CPU_A9
-set_location_assignment PIN_AF4  -to CPU_A10
-set_location_assignment PIN_AD3  -to CPU_A11
-set_location_assignment PIN_AE3  -to CPU_A12
-set_location_assignment PIN_AF6  -to CPU_A13
-set_location_assignment PIN_AD6  -to CPU_A14
-set_location_assignment PIN_AE6  -to CPU_A15
-set_location_assignment PIN_AE17  -to CPU_A16
-set_location_assignment PIN_AC18  -to CPU_A17
-set_location_assignment PIN_AE18  -to CPU_A18
-set_location_assignment PIN_AC19  -to CPU_A19
-set_location_assignment PIN_AE19  -to CPU_A20
+set_location_assignment PIN_AE14  -to CPU_A[0]
+set_location_assignment PIN_AC15  -to CPU_A[1]
+set_location_assignment PIN_AC14  -to CPU_A[2]
+set_location_assignment PIN_AF11  -to CPU_A[3]
+set_location_assignment PIN_AC10  -to CPU_A[4]
+set_location_assignment PIN_AE9  -to CPU_A[5]
+set_location_assignment PIN_AF7  -to CPU_A[6]
+set_location_assignment PIN_AE7  -to CPU_A[7]
+set_location_assignment PIN_AE5  -to CPU_A[8]
+set_location_assignment PIN_AD5  -to CPU_A[9]
+set_location_assignment PIN_AF4  -to CPU_A[10]
+set_location_assignment PIN_AD3  -to CPU_A[11]
+set_location_assignment PIN_AE3  -to CPU_A[12]
+set_location_assignment PIN_AF6  -to CPU_A[13]
+set_location_assignment PIN_AD6  -to CPU_A[14]
+set_location_assignment PIN_AE6  -to CPU_A[15]
+set_location_assignment PIN_AE17  -to CPU_A[16]
+set_location_assignment PIN_AC18  -to CPU_A[17]
+set_location_assignment PIN_AE18  -to CPU_A[18]
+set_location_assignment PIN_AC19  -to CPU_A[19]
+set_location_assignment PIN_AE19  -to CPU_A[20]
 
 # USB
 set_location_assignment PIN_AF24  -to USB_INT_

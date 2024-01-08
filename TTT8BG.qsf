@@ -37,25 +37,369 @@
 # -------------------------------------------------------------------------- #
 
 
-set_global_assignment -name FAMILY "Cyclone IV GX"
-set_global_assignment -name DEVICE EP4CGX150DF27I7
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE15F23C7
 set_global_assignment -name TOP_LEVEL_ENTITY TTT8BG
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 17.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:50:32  JANUARY 04, 2024"
 set_global_assignment -name LAST_QUARTUS_VERSION "17.0.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
-set_global_assignment -name MIN_CORE_JUNCTION_TEMP "-40"
-set_global_assignment -name MAX_CORE_JUNCTION_TEMP 100
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
-set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
-set_global_assignment -name VERILOG_FILE ps2_keyboard.v
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name BDF_FILE TTT8BG.bdf
 set_global_assignment -name NUM_PARALLEL_PROCESSORS 16
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_ADDR[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_BA[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_BA[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_CAS_N
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_CKE
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_CLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_CS_N
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_DQ[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_LDQM
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_RAS_N
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_UDQM
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to DRAM_WE_N
+set_location_assignment PIN_T2 -to CLOCK_50
+set_location_assignment PIN_V2 -to DRAM_ADDR[0]
+set_location_assignment PIN_W1 -to DRAM_ADDR[10]
+set_location_assignment PIN_Y4 -to DRAM_ADDR[11]
+set_location_assignment PIN_V6 -to DRAM_ADDR[12]
+set_location_assignment PIN_V1 -to DRAM_ADDR[1]
+set_location_assignment PIN_U2 -to DRAM_ADDR[2]
+set_location_assignment PIN_U1 -to DRAM_ADDR[3]
+set_location_assignment PIN_V3 -to DRAM_ADDR[4]
+set_location_assignment PIN_V4 -to DRAM_ADDR[5]
+set_location_assignment PIN_Y2 -to DRAM_ADDR[6]
+set_location_assignment PIN_AA1 -to DRAM_ADDR[7]
+set_location_assignment PIN_Y3 -to DRAM_ADDR[8]
+set_location_assignment PIN_V5 -to DRAM_ADDR[9]
+set_location_assignment PIN_Y1 -to DRAM_BA[0]
+set_location_assignment PIN_W2 -to DRAM_BA[1]
+set_location_assignment PIN_AA4 -to DRAM_CAS_N
+set_location_assignment PIN_W6 -to DRAM_CKE
+set_location_assignment PIN_Y6 -to DRAM_CLK
+set_location_assignment PIN_AA3 -to DRAM_CS_N
+set_location_assignment PIN_AA10 -to DRAM_DQ[0]
+set_location_assignment PIN_Y8 -to DRAM_DQ[10]
+set_location_assignment PIN_V9 -to DRAM_DQ[11]
+set_location_assignment PIN_V10 -to DRAM_DQ[12]
+set_location_assignment PIN_Y10 -to DRAM_DQ[13]
+set_location_assignment PIN_W10 -to DRAM_DQ[14]
+set_location_assignment PIN_V11 -to DRAM_DQ[15]
+set_location_assignment PIN_AB9 -to DRAM_DQ[1]
+set_location_assignment PIN_AA9 -to DRAM_DQ[2]
+set_location_assignment PIN_AB8 -to DRAM_DQ[3]
+set_location_assignment PIN_AA8 -to DRAM_DQ[4]
+set_location_assignment PIN_AB7 -to DRAM_DQ[5]
+set_location_assignment PIN_AA7 -to DRAM_DQ[6]
+set_location_assignment PIN_AB5 -to DRAM_DQ[7]
+set_location_assignment PIN_Y7 -to DRAM_DQ[8]
+set_location_assignment PIN_W8 -to DRAM_DQ[9]
+set_location_assignment PIN_AA5 -to DRAM_LDQM
+set_location_assignment PIN_AB3 -to DRAM_RAS_N
+set_location_assignment PIN_W7 -to DRAM_UDQM
+set_location_assignment PIN_AB4 -to DRAM_WE_N
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[0] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[10] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[11] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[12] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[1] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[2] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[3] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[4] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[5] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[6] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[7] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[8] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_ADDR[9] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_BA[0] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_BA[1] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_CAS_N -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_CKE -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_CLK -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_CS_N -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[0] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[10] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[11] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[12] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[13] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[14] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[15] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[1] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[2] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[3] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[4] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[5] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[6] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[7] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[8] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_DQ[9] -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_LDQM -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_RAS_N -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_UDQM -section_id SDRAM
+set_global_assignment -name ASSIGNMENT_GROUP_MEMBER DRAM_WE_N -section_id SDRAM
+set_location_assignment PIN_L22 -to I2C_SDA
+set_location_assignment PIN_L21 -to I2C_SCL
+set_location_assignment PIN_M19 -to SER_RX
+set_location_assignment PIN_M20 -to SER_TX
+set_location_assignment PIN_AB16 -to CSYNC
+set_location_assignment PIN_K21 -to VGA_HS
+set_location_assignment PIN_K22 -to VGA_VS
+set_location_assignment PIN_AB19 -to PS2_CLK_I
+set_location_assignment PIN_N21 -to PS2_CLK_O
+set_location_assignment PIN_W21 -to PS2_DAT_I
+set_location_assignment PIN_M21 -to PS2_DAT_O
+set_location_assignment PIN_AB18 -to IEC_DATA_I
+set_location_assignment PIN_AB19 -to IEC_CLK_I
+set_location_assignment PIN_AB20 -to IEC_SRQ_I
+set_location_assignment PIN_V21 -to IEC_ATN_O
+set_location_assignment PIN_U21 -to IEC_DATA_O
+set_location_assignment PIN_R21 -to IEC_CLK_O
+set_location_assignment PIN_P21 -to IEC_SRQ_O
+set_location_assignment PIN_B4 -to AVR_CLK
+set_location_assignment PIN_AA18 -to SPI_CS_ROM
+set_location_assignment PIN_AA19 -to SPI_MOSI
+set_location_assignment PIN_AA20 -to SPI_SCK
+set_location_assignment PIN_Y22 -to SPI_MISO
+set_location_assignment PIN_AB13 -to I2S_LRCK
+set_location_assignment PIN_AB14 -to I2S_DIN
+set_location_assignment PIN_AB15 -to I2S_BCK
+set_location_assignment PIN_AB17 -to SPDIF
+set_location_assignment PIN_R22 -to SNES_CLOCK
+set_location_assignment PIN_P22 -to SNES_LATCH
+set_location_assignment PIN_R2 -to BK_CS
+set_location_assignment PIN_P2 -to BK_MOSI
+set_location_assignment PIN_N2 -to BK_MISO
+set_location_assignment PIN_M2 -to BK_CLK
+set_location_assignment PIN_J2 -to CPU_NMI_
+set_location_assignment PIN_H2 -to CPU_ABORT_
+set_location_assignment PIN_F2 -to CPU_IRQ_
+set_location_assignment PIN_D2 -to CPU_RESET_
+set_location_assignment PIN_C2 -to CPU_RDY
+set_location_assignment PIN_B2 -to CPU_VPB
+set_location_assignment PIN_A3 -to CPU_PHI2
+set_location_assignment PIN_A4 -to CPU_BE
+set_location_assignment PIN_C3 -to CPU_E
+set_location_assignment PIN_A5 -to CPU_RW_
+set_location_assignment PIN_C4 -to CPU_VDA
+set_location_assignment PIN_B5 -to CPU_VPA
+set_location_assignment PIN_R1 -to USB_INT_
+set_location_assignment PIN_P1 -to USB_CS_
+set_location_assignment PIN_A20 -to CIA_PHI22
+set_location_assignment PIN_B20 -to CIA_CS22_
+set_location_assignment PIN_J1 -to RAM0_CS_
+set_location_assignment PIN_H1 -to RAM1_CS_
+set_location_assignment PIN_N1 -to WE_
+set_location_assignment PIN_M1 -to RE_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to RE_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to WE_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to RAM1_CS_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to RAM0_CS_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CIA_CS22_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CIA_PHI22
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to USB_CS_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to USB_INT_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_VPA
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_VDA
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_RW_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_E
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_BE
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_PHI2
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_VPB
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_RDY
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_RESET_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_ABORT_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_NMI_
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to BK_CLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to BK_MISO
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to BK_MOSI
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to BK_CS
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SNES_LATCH
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SNES_CLOCK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPDIF
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to I2S_BCK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to I2S_DIN
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to I2S_LRCK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_MISO
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_SCK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_MOSI
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_CS_ROM
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to AVR_CLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_SRQ_O
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_CLK_O
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_DATA_O
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_ATN_O
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_SRQ_I
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_CLK_I
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to IEC_DATA_I
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PS2_DAT_O
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PS2_CLK_O
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_VS
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_HS
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CSYNC
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SER_TX
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SER_RX
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to I2C_SCL
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to I2C_SDA
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PS2_DAT_I
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to PS2_CLK_I
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_IRQ_
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[1]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[2]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[3]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[4]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[5]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[6]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_D[7]
+set_location_assignment PIN_B6 -to CPU_A[0]
+set_location_assignment PIN_B7 -to CPU_A[1]
+set_location_assignment PIN_B8 -to CPU_A[2]
+set_location_assignment PIN_B9 -to CPU_A[3]
+set_location_assignment PIN_B10 -to CPU_A[4]
+set_location_assignment PIN_B13 -to CPU_A[5]
+set_location_assignment PIN_B14 -to CPU_A[6]
+set_location_assignment PIN_B15 -to CPU_A[7]
+set_location_assignment PIN_B16 -to CPU_A[8]
+set_location_assignment PIN_B17 -to CPU_A[9]
+set_location_assignment PIN_B18 -to CPU_A[10]
+set_location_assignment PIN_B19 -to CPU_A[11]
+set_location_assignment PIN_A19 -to CPU_A[12]
+set_location_assignment PIN_A18 -to CPU_A[13]
+set_location_assignment PIN_A17 -to CPU_A[14]
+set_location_assignment PIN_A16 -to CPU_A[15]
+set_location_assignment PIN_Y13 -to KEY[1]
+set_location_assignment PIN_W13 -to KEY[0]
+set_location_assignment PIN_E4 -to LED[0]
+set_location_assignment PIN_AA16 -to CHROMA[0]
+set_location_assignment PIN_AA17 -to CHROMA[1]
+set_location_assignment PIN_AA13 -to LUMA[0]
+set_location_assignment PIN_AA14 -to LUMA[1]
+set_location_assignment PIN_AA15 -to LUMA[2]
+set_location_assignment PIN_J21 -to VGA_B[0]
+set_location_assignment PIN_H21 -to VGA_R[1]
+set_location_assignment PIN_F21 -to VGA_G[1]
+set_location_assignment PIN_E21 -to VGA_B[2]
+set_location_assignment PIN_D21 -to VGA_R[3]
+set_location_assignment PIN_C21 -to VGA_G[3]
+set_location_assignment PIN_B21 -to VGA_B[4]
+set_location_assignment PIN_N19 -to VGA_G[5]
+set_location_assignment PIN_J22 -to VGA_G[0]
+set_location_assignment PIN_H22 -to VGA_R[0]
+set_location_assignment PIN_F22 -to VGA_B[1]
+set_location_assignment PIN_E22 -to VGA_G[2]
+set_location_assignment PIN_D22 -to VGA_R[2]
+set_location_assignment PIN_C22 -to VGA_B[3]
+set_location_assignment PIN_B22 -to VGA_G[4]
+set_location_assignment PIN_N20 -to VGA_R[4]
+set_location_assignment PIN_W22 -to SPI_CS_EXT[0]
+set_location_assignment PIN_V22 -to SPI_CS_EXT[1]
+set_location_assignment PIN_U22 -to SPI_CS_EXT[2]
+set_location_assignment PIN_A6 -to CPU_D[0]
+set_location_assignment PIN_A7 -to CPU_D[1]
+set_location_assignment PIN_A8 -to CPU_D[2]
+set_location_assignment PIN_A9 -to CPU_D[3]
+set_location_assignment PIN_A10 -to CPU_D[4]
+set_location_assignment PIN_A13 -to CPU_D[5]
+set_location_assignment PIN_A14 -to CPU_D[6]
+set_location_assignment PIN_A15 -to CPU_D[7]
+set_location_assignment PIN_B3 -to CPU_A[16]
+set_location_assignment PIN_B1 -to CPU_A[17]
+set_location_assignment PIN_C1 -to CPU_A[18]
+set_location_assignment PIN_E1 -to CPU_A[19]
+set_location_assignment PIN_F1 -to CPU_A[20]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[12]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CPU_A[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to KEY[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to LED[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CHROMA[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to CHROMA[1]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to LUMA[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to LUMA[1]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to LUMA[2]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_B[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_R[1]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_G[1]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_B[2]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_R[3]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_G[3]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_B[4]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_G[5]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_G[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_R[0]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_B[1]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_G[2]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_R[2]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_B[3]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_G[4]
+set_instance_assignment -name IO_STANDARD "3.0-V LVCMOS" -to VGA_R[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_CS_EXT[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_CS_EXT[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to SPI_CS_EXT[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[16]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[17]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[18]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[19]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to CPU_A[20]
+set_location_assignment PIN_N22 -to SNES_DATA[1]
+set_location_assignment PIN_M22 -to SNES_DATA[2]
+set_global_assignment -name VERILOG_FILE rtl/compositeVideo/testSignalGenerator.v
+set_global_assignment -name VHDL_FILE rtl/compositeVideo/main.vhd
+set_global_assignment -name VHDL_FILE rtl/compositeVideo/luma_gen.vhd
+set_global_assignment -name VHDL_FILE rtl/compositeVideo/chroma_gen.vhd
+set_global_assignment -name VHDL_FILE rtl/compositeVideo/composite_sync.vhd
+set_global_assignment -name VERILOG_FILE ps2_keyboard.v
+set_global_assignment -name BDF_FILE TTT8BG.bdf
+set_global_assignment -name QIP_FILE PPL.qip
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to kbd_clk
-set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to kbd_dat

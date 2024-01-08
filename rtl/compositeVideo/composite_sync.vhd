@@ -17,7 +17,7 @@ port(
 	clk32 : in std_logic;
 	hsync : in std_logic;
 	vsync : in std_logic;
-    pal: in std_logic; -- 0 for NTSC, 1 for PAL
+   palNtsc: in std_logic; -- 0 for PAL, 1 for NTSC,
 	csync : out std_logic;
 	blank : out std_logic
 );
@@ -73,7 +73,7 @@ process(dot_clk)
 			dot_count := dot_count + 1;
 		end if;
 
-        if (pal = '0') then -- NTSC (Dar: "seems to be ok for PAL also")
+        if (palNtsc = '1') then -- NTSC (Dar: "seems to be ok for PAL also")
 		    if    dot_count = (000)    then hsync0 <= '0';
 		    elsif dot_count = (000+38) then hsync0 <= '1';
 		    end if;
@@ -137,13 +137,12 @@ process(dot_clk)
 		elsif line_count = 250 then vblank <= '1';
 		end if;
 
-		if    dot_count = 100  then hblank <= '0';
-		elsif dot_count = 500 then hblank <= '1';
+		if dot_count = 100  then
+			hblank <= '0';
+		elsif dot_count = 500 then
+			hblank <= '1';
 		end if;
-
 	end if;
 end process;
-
-
 
 end architecture;

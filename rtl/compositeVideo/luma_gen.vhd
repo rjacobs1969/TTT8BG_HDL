@@ -26,10 +26,10 @@ port (
 -------------------------------------------------------------------------------
 --- io
 -------------------------------------------------------------------------------
-	lg_clock:	in std_logic;				--- clock
-	lg_hsync:	in std_logic;				--- colour enable
-	lg_vsync:	in std_logic;				--- pal/ntsc mode	
-	lg_rgb:		in std_logic_vector(2 downto 0);	--- rgb input
+	lg_clock:	in std_logic;								--- clock
+	lg_hsync:	in std_logic;								--- hsync
+	lg_vsync:	in std_logic;								--- vsync	
+	lg_rgb:		in std_logic_vector(2 downto 0);		--- rgb input
 	lg_out:		out std_logic_vector(4 downto 0));	--- luma out
 	
 end entity luma_gen;

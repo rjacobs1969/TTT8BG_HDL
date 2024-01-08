@@ -19,7 +19,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity mctest is
+entity fbas_encoder is
 -------------------------------------------------------------------------------
 --- io
 -------------------------------------------------------------------------------
@@ -30,41 +30,41 @@ port (
 	cgsel:		in std_logic;
 	hsync,vsync:	in std_logic;
 	luma:		out std_logic_vector(4 downto 0);
-	chroma:		out std_logic_vector(1 downto 0);
+	chroma:		out std_logic_vector(1 downto 0)
 );
 
-end entity mctest;
+end entity fbas_encoder;
 
-architecture main of mctest is
+architecture main of fbas_encoder is
 -------------------------------------------------------------------------------
 --- the chroma and luma signal generator components
 -------------------------------------------------------------------------------
 component chroma_gen is
-    port (
-	cg_clock:	in std_logic;				--- clock
-	cg_enable:	in std_logic;				--- colour enable
-	cg_hsync:	in std_logic;				--- hor. sync
-	cg_pnsel:	in std_logic;				--- mode select
-	cg_rgb:		in std_logic_vector(2 downto 0);	--- rgb input
-	cg_out:		out std_logic_vector(2 downto 0));	--- chroma out
+   port (
+		cg_clock:	in std_logic;								--- clock
+		cg_enable:	in std_logic;								--- colour enable
+		cg_hsync:	in std_logic;								--- hor. sync
+		cg_pnsel:	in std_logic;								--- mode select
+		cg_rgb:		in std_logic_vector(2 downto 0);		--- rgb input
+		cg_out:		out std_logic_vector(2 downto 0)	   --- chroma out,  (0) = color signal, (1) = burst, (2) = color 
+	);
 end component chroma_gen;
 
-for all:chroma_gen use entity chroma_gen(clock32);
-
 component luma_gen is
-    port (
-	lg_clock:	in std_logic;				--- clock
-	lg_hsync:	in std_logic;				--- colour enable
-	lg_vsync:	in std_logic;				--- pal/ntsc mode
-	lg_rgb:		in std_logic_vector(2 downto 0);	--- rgb input
-	lg_out:		out std_logic_vector(4 downto 0));	--- luma out
+   port (
+		lg_clock:	in std_logic;								--- clock
+		lg_hsync:	in std_logic;								--- colour enable
+		lg_vsync:	in std_logic;								--- pal/ntsc mode
+		lg_rgb:		in std_logic_vector(2 downto 0);		--- rgb input
+		lg_out:		out std_logic_vector(4 downto 0)
+	);  --- luma out
 end component luma_gen;
 
 -------------------------------------------------------------------------------
 --- internal signals
 -------------------------------------------------------------------------------
 signal	rgb_int:	std_logic_vector(2 downto 0);		--- rgb internal
-signal 	chroma_int:	std_logic_vector(2 downto 0);		--- chroma internal
+signal 	chroma_int:	std_logic_vector(2 downto 0);	--- chroma internal
 
 begin
 
@@ -142,7 +142,7 @@ begin
 -------------------------------------------------------------------------------
 end architecture main;
 
-configuration main of mctest is
+configuration main of fbas_encoder is
     for main
     end for;
 end configuration main;
