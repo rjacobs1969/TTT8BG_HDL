@@ -102,9 +102,9 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 912 8 1088 24)
+	(rect 1600 -144 1776 -128)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "blanking" (rect 90 0 130 12)(font "Arial" ))
+	(text "CSYNC" (rect 90 0 130 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -118,9 +118,9 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 920 -40 1096 -24)
+	(rect 1600 -160 1776 -144)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "VID[7..0]" (rect 90 0 134 12)(font "Arial" ))
+	(text "LUMA[2..0]" (rect 90 0 145 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -406,6 +406,56 @@ agreement for further details.
 		(rectangle (rect 16 16 264 160))
 	)
 )
+(symbol
+	(rect 1344 -184 1544 -72)
+	(text "lumaGeneration" (rect 5 0 81 12)(font "Arial" ))
+	(text "inst6" (rect 8 96 30 113)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk128" (rect 0 0 31 12)(font "Arial" ))
+		(text "clk128" (rect 21 27 52 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "videoIn[7..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "videoIn[7..0]" (rect 21 43 83 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "blanking" (rect 0 0 40 12)(font "Arial" ))
+		(text "blanking" (rect 21 59 61 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "cSync" (rect 0 0 31 12)(font "Arial" ))
+		(text "cSync" (rect 21 75 52 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 200 32)
+		(output)
+		(text "lumaOut[2..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "lumaOut[2..0]" (rect 123 27 190 39)(font "Arial" ))
+		(line (pt 200 32)(pt 184 32)(line_width 3))
+	)
+	(port
+		(pt 200 48)
+		(output)
+		(text "syncOut" (rect 0 0 42 12)(font "Arial" ))
+		(text "syncOut" (rect 144 43 186 55)(font "Arial" ))
+		(line (pt 200 48)(pt 184 48))
+	)
+	(drawing
+		(rectangle (rect 16 16 184 96))
+	)
+)
 (connector
 	(pt 608 232)
 	(pt 640 232)
@@ -517,17 +567,68 @@ agreement for further details.
 	(pt 1144 0)
 )
 (connector
-	(pt 904 -32)
-	(pt 920 -32)
-	(bus)
-)
-(connector
 	(pt 904 -64)
 	(pt 1080 -64)
 )
 (connector
+	(pt 1296 -32)
+	(pt 1328 -32)
+)
+(connector
+	(pt 1328 -32)
+	(pt 1328 -104)
+)
+(connector
+	(pt 1328 -104)
+	(pt 1344 -104)
+)
+(connector
+	(pt 904 -32)
+	(pt 1040 -32)
+	(bus)
+)
+(connector
+	(pt 1040 -136)
+	(pt 1040 -32)
+	(bus)
+)
+(connector
+	(pt 1344 -136)
+	(pt 1040 -136)
+	(bus)
+)
+(connector
+	(pt 1056 16)
+	(pt 1056 -120)
+)
+(connector
 	(pt 904 16)
-	(pt 912 16)
+	(pt 1056 16)
+)
+(connector
+	(pt 1056 -120)
+	(pt 1344 -120)
+)
+(connector
+	(pt 1344 -152)
+	(pt 520 -152)
+)
+(connector
+	(pt 520 -152)
+	(pt 520 -112)
+)
+(connector
+	(pt 16 -112)
+	(pt 520 -112)
+)
+(connector
+	(pt 1600 -152)
+	(pt 1544 -152)
+	(bus)
+)
+(connector
+	(pt 1600 -136)
+	(pt 1544 -136)
 )
 (junction (pt 608 112))
 (junction (pt 592 96))
