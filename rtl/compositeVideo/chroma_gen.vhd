@@ -12,7 +12,9 @@
 --
 -- Revision:		0.31
 -- License:		GPL
---------------------------------------------------------------------------------
+--
+-- Additional Comments:	10.01.2024 Adapted for HSL input by Robin Jacobs
+------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -22,14 +24,14 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity chroma_gen is
 
 port (
-	cg_clock:	  in std_logic;								--- input clock
-	cg_enable:	  in std_logic;								--- colour enable
-	cg_hsync:	  in std_logic;								--- hor. sync
-	cg_pnsel:	  in std_logic;								--- system (pal/ntsc)
-	cg_rgbYuvSel: in std_logic;							    --- rgb/yuv selection
-	cg_rgb:		  in std_logic_vector(2 downto 0);		    --- rgb input
-	cg_yUv:		  in std_logic_vector(3 downto 0);		    --- the U component of yuv input
-	cg_out:		 out std_logic_vector(2 downto 0)			--- chroma output
+	clk32:	      in std_logic;								--- input clock (32Mhz)
+	colorEnable:  in std_logic;								--- colour enable
+	hsync:	  	  in std_logic;								--- hor. sync
+	vsync:	  	  in std_logic;								--- vert sync
+	palNtsc:	  in std_logic;								--- system (pal/ntsc)
+	HSL:		  in std_logic_vector(7 downto 0);		    --- HSL  input, format 1:3:4  1 saturation, 3 luma, 4 chroma
+	saturation:   in std_logic_vector(1 downto 0);			--- saturation input amount
+	chroma:		 out std_logic_vector(1 downto 0)			--- chroma output
 
 );
 end entity chroma_gen;
@@ -37,24 +39,34 @@ end entity chroma_gen;
 ---############################################################################
 --- 32MHz
 ---############################################################################
-architecture clock32 of chroma_gen is
+architecture color_gen of chroma_gen is
 
 signal 	carrier: 	std_logic_vector(15 downto 0);
 signal 	bcounter:	std_logic_vector(3 downto 0);
 signal 	phase:		std_logic_vector(3 downto 0);
 signal 	scarrier:	std_logic_vector(3 downto 0);
+signal  hue:	    std_logic_vector(3 downto 0);
+signal	colorOn:	std_logic;
 signal	oddeven:	std_logic;
 signal 	burst,bstop:	std_logic;
-signal	cenable:	std_logic;
 
 begin
 -------------------------------------------------------------------------------
+--- hue value
+-------------------------------------------------------------------------------
+	process (HSL) is
+	begin
+		hue <= HSL(3 downto 0);	 --- hue value is the 4 LSB of the HSL input
+		colorOn <= HSL(7);		 --- colorOn is the MSB of the HSL input
+	end process;
+
+-------------------------------------------------------------------------------
 --- DDS for carrier
 -------------------------------------------------------------------------------
-    process (cg_clock) is
+    process (clk32) is
     begin
-		if (rising_edge(cg_clock)) then
-			if (cg_pnsel='0') then			--- PAL
+		if (rising_edge(clk32)) then
+			if (palNtsc = '0') then			--- PAL
 				carrier <= carrier + 9080;
 			else							--- NTSC
 				carrier <= carrier + 7331;
@@ -74,9 +86,9 @@ begin
 		end if;
     end process;
 
-    process (cg_hsync,bstop,carrier(15)) is
+    process (hsync,bstop,carrier(15)) is
     begin
-		if (cg_hsync='0') then
+		if (hsync='0') then
 			bcounter <= "0100";
 		elsif ((rising_edge(carrier(15))) and (bstop='0'))  then
 			bcounter <= bcounter + 1;
@@ -88,11 +100,11 @@ begin
 -------------------------------------------------------------------------------
 --- odd/even line
 -------------------------------------------------------------------------------
-    process (cg_hsync,cg_pnsel) is
-    begin
-		if (rising_edge(cg_hsync)) then
-			if (cg_pnsel='0') then
-				oddeven <= not(oddeven);
+	process (hsync) is
+    begin	
+		if (rising_edge(hsync) and vsync='0') then
+			if (palNtsc='0') then
+				oddeven <= not(oddeven); -- this is the "AL" in pAL (Alternate Line), not needed for NTSC
 			else
 				oddeven <= '0';
 			end if;
@@ -102,41 +114,19 @@ begin
 -------------------------------------------------------------------------------
 --- carrier phase
 -------------------------------------------------------------------------------
-    process (cg_rgb,burst,oddeven) is
+    process (hue,burst,oddeven) is
     begin
 		if (burst='1') then
-			if ((oddeven = '0') and (cg_pnsel='0')) then
+			if ((oddeven = '0') and (palNtsc='0')) then
 				phase <= "0110";			--- burst phase 135 deg
 			else
 				phase <= "1010";			--- burst phase -135 deg
 			end if;
 		else
-			if (cg_rgbYuvSel = '1') then --- YUV
-				if (oddeven = '0') then
-					phase <= cg_yUv;
-				else
-					phase <= 0 - cg_yUv;
-				end if;
-			elsif (oddeven = '0') then
-				case (cg_rgb) is
-					when "001" => phase <= "0000";	--- blue phase
-					when "010" => phase <= "0101";	--- red phase
-					when "011" => phase <= "0011";	--- magenta phase
-					when "100" => phase <= "1011";	--- green phase
-					when "101" => phase <= "1101";	--- cyan phase
-					when "110" => phase <= "0111";	--- yellow phase
-					when others => phase <= "0000";	--- dummy function
-				end case;
+			if (oddeven = '0') then
+				phase <= hue;
 			else
-				case (cg_rgb) is
-					when "001" => phase <= "0000";	--- blue phase
-					when "010" => phase <= "1011";	--- red phase
-					when "011" => phase <= "1101";	--- magenta phase
-					when "100" => phase <= "0101";	--- green phase
-					when "101" => phase <= "0011";	--- cyan phase
-					when "110" => phase <= "1001";	--- yellow phase
-					when others => phase <= "0000";	--- dummy function
-				end case;
+				phase <= 0 - hue;
 			end if;
 		end if;
     end process;
@@ -147,31 +137,38 @@ begin
     scarrier <= carrier(15 downto 12) + phase;
 
 -------------------------------------------------------------------------------
---- colour enable
+--- chroma level
 -------------------------------------------------------------------------------
-    process (cg_rgb,cg_enable) is
-    begin
-		if ((cg_rgb/="000") and (cg_rgb/="111") and (cg_enable='1')) then
-			cenable <= '1';
+process (clk32) is
+begin
+	if (rising_edge(clk32)) then
+		if (colorEnable='1') then
+			if (burst='1') then
+				chroma(0) <= scarrier(3);
+				chroma(1) <= 'Z';
+			elsif (colorOn='1') then
+				if (scarrier(3)='0') then
+					case saturation is
+						when "00" => chroma <= "0Z";
+						when "01" => chroma <= "10";
+						when "10" => chroma <= "Z0";
+						when "11" => chroma <= "00";
+					end case;
+				else
+					case saturation is
+						when "00" => chroma <= "1Z";
+						when "01" => chroma <= "01";
+						when "10" => chroma <= "Z1";
+						when "11" => chroma <= "11";
+					end case;
+				end if;
+			else
+				chroma <= "ZZ";
+			end if;
 		else
-			cenable <= '0';
+			chroma <= "ZZ";
 		end if;
-    end process;
+	end if;
+end process;
 
--------------------------------------------------------------------------------
---- chroma signal
--------------------------------------------------------------------------------
-    process (cg_clock) is
-    begin
-		if (rising_edge(cg_clock)) then
-			cg_out(2) <= cenable;
-			cg_out(1) <= burst;
-			cg_out(0) <= scarrier(3);
-		end if;
-    end process;
-
-end architecture clock32;
-
-
-
-
+end architecture color_gen;
