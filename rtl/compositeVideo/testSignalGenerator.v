@@ -49,14 +49,13 @@ module testBarSignalGenerator (
     input wire keyboardInterrupt,                  // Interrupt signal
     input wire [7:0] keyboardScanCode,             // 8 bit scancode
 
-    output reg palNtsc,                            // PAL (0) or NTSC (1) video standard selection
-    output reg colorEnable,                        // Color enable (1) or B&W (0)
+    output reg palNtsc = 1'b1,                            // PAL (0) or NTSC (1) video standard selection
+    output reg colorEnable = 1'b1,                 // Color enable (1) or B&W (0)
     output reg [7:0] videoOut,                     // HSL  output, format 1:3:4  1 saturation, 3 luma, 4 chroma
     output reg hSync,                              // Horizontal sync
     output reg vSync,                              // Vertical sync
     output reg blanking,                           // Blanking signal
-    output reg [1:0] saturationValue = 2'b10       // Saturation (default = 2)
-
+    output reg [1:0] saturationValue = 2'b11       // Saturation (default = 3  = 100% saturation)
 );
 
     /*
@@ -81,12 +80,12 @@ module testBarSignalGenerator (
     reg [8:0] backPorch = 9'd183;                       // @32 Mhz = 182  cycles for PAL (5.7uS)
     reg [10:0] videoTime = 11'd1662;                    // @32 Mhz = 1662 cycles for PAL (52uS)
     reg [8:0] hBlankTime = 9'd386;                      // frontPorch + hsyncPulse + backPorch;
-    reg [9:0] numberOfLines = 10'd312;                  // Number of lines for PAL (312) or NTSC (262)
+    reg [10:0] numberOfLines = 11'd312;                  // Number of lines for PAL (312) or NTSC (262)
     reg [3:0] startChromaValue = 4'b0;                  // Start chroma value (default = 0)
     reg [3:0] chromaValue = 4'b0;                       // Chroma value (default = 0)
     reg [2:0] lumaValue = 3'b111;                      // Luma value (default = 7)
 
-    reg [3:0] pattern = 2'b0;                           // Pattern (default = 0)
+    reg [1:0] pattern = 2'b00;                           // Pattern (default = 0)
     reg [10:0] hCount = 11'd0;                          // Horizontal counter
     reg [10:0] vCount = 11'd0;                          // Vertical counter
     reg [10:0] dotCount = 11'd0;                        // Dot counter
@@ -130,20 +129,12 @@ module testBarSignalGenerator (
     always @(posedge clk32) begin
 
         blanking <= hBlank | vBlank | ~videoEnable;
+		  colorEnable <= 1'b1;
 
         if (hCount < lineTime)
             hCount <= hCount + 1'b1;
         else
-            begin
-                hCount <= 11'd0;
-                if (vCount < numberOfLines) begin
-                    vCount <= vCount + 1'b1;
-                    vSync <= 1'b0;
-                end else begin
-                    vCount <= 10'd0;
-                    vSync <= 1'b1;
-                end
-            end
+            hCount <= 11'd0;
 
         if (hCount < hBlankTime)
             begin
@@ -151,13 +142,25 @@ module testBarSignalGenerator (
                 dotCount <= 11'b0;
                 colorBarIndex <= 0;
             end
-        else
+        else begin
             hBlank <= 1'b0;
+        end
 
-        if (hCount == frontPorch)
+        if (hCount == frontPorch) begin
             hSync <= 1'b1;
-        else if (hCount == frontPorch + hsyncPulse)
+            vCount <= vCount + 1'b1;
+            if (vCount == numberOfLines) begin
+                vSync <= 1'b1;
+                vCount <= 11'd1;
+                vBlank <= 1'b1;
+
+
+            end else if (vCount == 11'd23)
+                vBlank <= 1'b0;
+        end else if (hCount == frontPorch + hsyncPulse) begin
             hSync <= 1'b0;
+            vSync <= 1'b0;
+        end
 
         if (keyboardInterrupt == 1'b1) begin
             case (keyboardScanCode)
@@ -169,7 +172,7 @@ module testBarSignalGenerator (
                     backPorch <= 9'd183;                          // @32 Mhz = 182  cycles for PAL (5.7uS)
                     videoTime <= 11'd1662;                        // @32 Mhz = 1662 cycles for PAL (52uS)
                     hBlankTime <= 9'd386;                         // frontPorch + hsyncPulse + backPorch;
-                    numberOfLines <= 10'd312;                     // Number of lines for PAL (312)
+                    numberOfLines <= 11'd312;                     // Number of lines for PAL (312)
                 end
                 8'h31: begin
                     palNtsc <= 1'b1;                              // NTSC video standard
@@ -179,7 +182,7 @@ module testBarSignalGenerator (
                     backPorch <= 9'd145;                          // @32 Mhz = 144  cycles for NTSC (4.5uS)
                     videoTime <= 11'd1693;                        // @32 Mhz = 1693 cycles for NTSC (52.9uS)
                     hBlankTime <= 9'd342;                         // frontPorch + hsyncPulse + backPorch;
-                    numberOfLines <= 10'd262;                     // Number of lines for NTSC (262)
+                    numberOfLines <= 11'd262;                     // Number of lines for NTSC (262)
                 end
                 8'h33: begin
                     palNtsc <= 1'b0;                              // PAL60 video standard (NTSC timing with PAL color subcarrier)
@@ -189,7 +192,7 @@ module testBarSignalGenerator (
                     backPorch <= 9'd145;                          // @32 Mhz = 144  cycles for NTSC (4.5uS)
                     videoTime <= 11'd1693;                        // @32 Mhz = 1693 cycles for NTSC (52.9uS)
                     hBlankTime <= 9'd342;                         // frontPorch + hsyncPulse + backPorch;
-                    numberOfLines <= 10'd262;                     // Number of lines for NTSC (262)
+                    numberOfLines <= 11'd262;                     // Number of lines for NTSC (262)
                 end
                 8'h35: colorEnable <= 1'b0;                             // B&W
                 8'h2D: colorEnable <= 1'b1;                             // Color
@@ -206,19 +209,15 @@ module testBarSignalGenerator (
             endcase
         end
 
-        if (hBlank == 1'b0 && vBlank == 1'b0 && videoEnable == 1'b1) begin
+        if (vBlank == 1'b0 && videoEnable == 1'b1) begin
             dotCount <= dotCount + 1'b1;
             case(pattern)
-                2'b00: begin    // Color bars White, Yellow, Cyan, Green, Magenta, Red, Blue, Black
-                    if (dotCount > 11'd208)
-                        begin
-                            dotCount <= 11'd0;
-                            colorBarIndex <= colorBarIndex + 1'b1;
-                            chromaTemp <= colorBarChroma[colorBarIndex];
-                            lumaTemp <= colorBarLuma[colorBarIndex];
-                            saturationTemp <= colorBarSaturation[colorBarIndex];
-                            videoOut <= {saturationTemp, lumaTemp, chromaTemp};
-                        end
+
+                2'b00: begin
+                        if (vCount[6])
+                            videoOut <= {1'b1, vCount[5:3], dotCount[9:6]}; // color bars
+                        else
+                            videoOut <= {1'b0, dotCount[9:3]}; // BW ramp
                     end
                 2'b01: begin
                     if (dotCount > 11'd104) // 16 Color bars, changable luma and saturation
@@ -250,6 +249,6 @@ module testBarSignalGenerator (
                     end
             endcase
         end else
-            videoOut <= {1'b0, 3'b000, 4'b0000};
+           videoOut <= {1'b0, 3'b000, 4'b0000};
     end
 endmodule

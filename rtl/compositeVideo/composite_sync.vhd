@@ -73,7 +73,7 @@ process(dot_clk)
 			dot_count := dot_count + 1;
 		end if;
 
-        if (palNtsc = '1') then -- NTSC (Dar: "seems to be ok for PAL also")
+        if (palNtsc = '0') then -- NTSC (Dar: "seems to be ok for PAL also")
 		    if    dot_count = (000)    then hsync0 <= '0';
 		    elsif dot_count = (000+38) then hsync0 <= '1';
 		    end if;

@@ -28,6 +28,7 @@ port (
 	colorEnable:  in std_logic;								--- colour enable
 	hsync:	  	  in std_logic;								--- hor. sync
 	vsync:	  	  in std_logic;								--- vert sync
+	blanking:  in std_logic;								--- blanking
 	palNtsc:	  in std_logic;								--- system (pal/ntsc)
 	HSL:		  in std_logic_vector(7 downto 0);		    --- HSL  input, format 1:3:4  1 saturation, 3 luma, 4 chroma
 	saturation:   in std_logic_vector(1 downto 0);			--- saturation input amount
@@ -43,6 +44,7 @@ architecture color_gen of chroma_gen is
 
 signal 	carrier: 	std_logic_vector(15 downto 0);
 signal 	bcounter:	std_logic_vector(3 downto 0);
+signal  vcounter:	std_logic_vector(9 downto 0);
 signal 	phase:		std_logic_vector(3 downto 0);
 signal 	scarrier:	std_logic_vector(3 downto 0);
 signal  hue:	    std_logic_vector(3 downto 0);
@@ -88,7 +90,7 @@ begin
 
     process (hsync,bstop,carrier(15)) is
     begin
-		if (hsync='0') then
+		if (hsync='1') then
 			bcounter <= "0100";
 		elsif ((rising_edge(carrier(15))) and (bstop='0'))  then
 			bcounter <= bcounter + 1;
@@ -98,18 +100,24 @@ begin
     burst <= bcounter(3);
 
 -------------------------------------------------------------------------------
---- odd/even line
+--- odd/even line and line counter
 -------------------------------------------------------------------------------
 	process (hsync) is
-    begin	
-		if (rising_edge(hsync) and vsync='0') then
-			if (palNtsc='0') then
-				oddeven <= not(oddeven); -- this is the "AL" in pAL (Alternate Line), not needed for NTSC
-			else
-				oddeven <= '0';
+    begin
+		if rising_edge(hsync) then
+			if vsync='0' then
+				if (palNtsc='0') then
+					oddeven <= not(oddeven); -- this is the "AL" in pAL (Alternate Line), not needed for NTSC
+				else
+					oddeven <= '0';
+				end if;
+				vcounter <= vcounter + 1;
+			elsif (vsync='1') then
+				vcounter <= "0000000000";
 			end if;
 		end if;
     end process;
+
 
 -------------------------------------------------------------------------------
 --- carrier phase
@@ -137,36 +145,27 @@ begin
     scarrier <= carrier(15 downto 12) + phase;
 
 -------------------------------------------------------------------------------
---- chroma level
+--- chroma 
 -------------------------------------------------------------------------------
-process (clk32) is
+process (clk32, colorEnable) is
 begin
 	if (rising_edge(clk32)) then
 		if (colorEnable='1') then
 			if (burst='1') then
-				chroma(0) <= scarrier(3);
-				chroma(1) <= 'Z';
-			elsif (colorOn='1') then
-				if (scarrier(3)='0') then
-					case saturation is
-						when "00" => chroma <= "0Z";
-						when "01" => chroma <= "10";
-						when "10" => chroma <= "Z0";
-						when "11" => chroma <= "00";
-					end case;
-				else
-					case saturation is
-						when "00" => chroma <= "1Z";
-						when "01" => chroma <= "01";
-						when "10" => chroma <= "Z1";
-						when "11" => chroma <= "11";
-					end case;
+				if (vcounter > "0000000101") then
+					chroma(0) <= scarrier(3);
+					chroma(1) <= 'Z';
 				end if;
+			elsif ((blanking = '0') and (colorOn='1')) then
+				chroma(0) <= 'Z';
+				chroma(1) <= scarrier(3);
 			else
-				chroma <= "ZZ";
+				chroma(0) <= 'Z';
+				chroma(1) <= 'Z';
 			end if;
 		else
-			chroma <= "ZZ";
+			chroma(0) <= 'Z';
+ 			chroma(1) <= 'Z';
 		end if;
 	end if;
 end process;
